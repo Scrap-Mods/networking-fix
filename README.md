@@ -3,8 +3,10 @@
 </p>
 
 # Networking Fix for Scrap Mechanic 🚀💣
-
 Stops Scrap Mechanic client from stalling packets. Fixes pretty much all the networking issues.
+
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/scrap-mods/networking-fix/total)
+![GitHub branch check runs](https://img.shields.io/github/check-runs/Scrap-Mods/networking-fix/main)
 
 <p align="center">
   <video src="https://github.com/user-attachments/assets/5bc6e72e-b829-4ad9-ae29-0fd8d7e7e41d"/>
