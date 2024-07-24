@@ -7,6 +7,7 @@ Stops Scrap Mechanic client from stalling packets. Fixes pretty much all the net
 
 ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/scrap-mods/networking-fix/total)
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/Scrap-Mods/networking-fix/main)
+[![Discord](https://img.shields.io/discord/944260227195351040?link=https%3A%2F%2Fdiscord.gg%2FahzyHPn3y2)](https://discord.gg/ahzyHPn3y2)
 
 <p align="center">
   <video src="https://github.com/user-attachments/assets/5bc6e72e-b829-4ad9-ae29-0fd8d7e7e41d"/>
