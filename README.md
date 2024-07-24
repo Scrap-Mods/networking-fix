@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./.github/images/networking-fix.png">
+  <img src="https://github.com/user-attachments/assets/37a85752-308a-402f-a818-ea5de49f0360"/>
 </p>
 
 # Networking Fix for Scrap Mechanic 🚀💣
