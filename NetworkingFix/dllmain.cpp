@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <array>
+#include <span>
 
 /*
 ScrapMechanic.exe.text + 4162CE: 48 8D 55 88 - lea rdx, [rbp - 78]
@@ -27,43 +28,51 @@ ScrapMechanic.exe.text + 416314 : A8 F9 - test al, -07
 ScrapMechanic.exe.text + 416316 : 75 0C - jne ScrapMechanic.exe.text + 416324
 */
 
+// Set any version that is supported
+#define _SM_VERSION_NUM 071772
+
+#if _SM_VERSION_NUM == 071772
+static constexpr std::uintptr_t offset = 0x4073BC;
+static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
+static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
+#elif _SM_VERSION_NUM == 066
 static constexpr std::uintptr_t offset = 0x4162F9 + 0x1000;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3E, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3F, 0x01, 0x00, 0x00, 0x90 };
+#else
+#   error Unsupported game version
+#endif
 
-BOOL APIENTRY DllMain( HMODULE hModule,
-                       DWORD  ul_reason_for_call,
-                       LPVOID lpReserved
-                     )
+static void* GetFinalAddress()
 {
-    if (ul_reason_for_call == DLL_PROCESS_ATTACH)
-    {
-        const std::uintptr_t scrapmechanic = uintptr_t(GetModuleHandle(NULL));
-        void* dest = reinterpret_cast<void*>(scrapmechanic + offset);
+	return reinterpret_cast<void*>(std::uintptr_t(GetModuleHandle(NULL)) + offset);
+}
 
-        // Failsafe to not patch game if original bytes differ
-        if (memcmp(dest, originalBytes.data(), originalBytes.size()))
-            return TRUE;
+static bool ApplyPatch(
+	void* dest,
+	const std::array<std::uint8_t, 6>& orig_bytes,
+	const std::array<std::uint8_t, 6>& bytes)
+{
+	// Failsafe to not patch game if original bytes differ
+	if (memcmp(dest, orig_bytes.data(), orig_bytes.size())) return false;
 
-        DWORD old;
-        VirtualProtect(dest, originalBytes.size(), PAGE_EXECUTE_READWRITE, &old);
-        memcpy_s(dest, originalBytes.size(), replacedBytes.data(), replacedBytes.size());
-        VirtualProtect(dest, originalBytes.size(), old, &old);
-    }
-    else if (ul_reason_for_call == DLL_PROCESS_DETACH)
-    {
-        const std::uintptr_t scrapmechanic = uintptr_t(GetModuleHandle(NULL));
-        void* dest = reinterpret_cast<void*>(scrapmechanic + offset);
+	DWORD v_oldProt;
+	VirtualProtect(dest, orig_bytes.size(), PAGE_EXECUTE_READWRITE, &v_oldProt);
+	memcpy_s(dest, orig_bytes.size(), bytes.data(), bytes.size());
+	VirtualProtect(dest, orig_bytes.size(), v_oldProt, &v_oldProt);
 
-        // Failsafe to not patch game if original bytes differ
-        if (memcmp(dest, replacedBytes.data(), replacedBytes.size()))
-            return TRUE;
+	return true;
+}
 
-        DWORD old;
-        VirtualProtect(dest, replacedBytes.size(), PAGE_EXECUTE_READWRITE, &old);
-        memcpy_s(dest, replacedBytes.size(), originalBytes.data(), originalBytes.size());
-        VirtualProtect(dest, replacedBytes.size(), old, &old);
-    }
+BOOL APIENTRY DllMain(
+	HMODULE hModule,
+	DWORD ul_reason_for_call,
+	LPVOID lpReserved)
+{
+	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
+		ApplyPatch(GetFinalAddress(), originalBytes, replacedBytes);
+	else if (ul_reason_for_call == DLL_PROCESS_DETACH)
+		ApplyPatch(GetFinalAddress(), replacedBytes, originalBytes);
 
-    return TRUE;
+	return TRUE;
 }
