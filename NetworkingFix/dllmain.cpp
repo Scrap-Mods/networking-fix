@@ -29,9 +29,13 @@ ScrapMechanic.exe.text + 416316 : 75 0C - jne ScrapMechanic.exe.text + 416324
 */
 
 // Set any version that is supported
-#define _SM_VERSION_NUM 072775
+#define _SM_VERSION_NUM 073776
 
-#if _SM_VERSION_NUM == 072775
+#if _SM_VERSION_NUM == 073776
+static constexpr std::uintptr_t offset = 0x40735C;
+static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
+static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
+#elif _SM_VERSION_NUM == 072775
 static constexpr std::uintptr_t offset = 0x4073DC;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
