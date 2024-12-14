@@ -43,7 +43,7 @@ There are 2 ways to enable the NetworkingFix module:
 - **As a Client:** Improves your connection stability to the host, minimizing lag and desynchronization issues.
 
 ### Is it a trojan/virus? 🛡️
-No evidence suggests this mod is a trojan or virus. However, always scan downloaded files with antivirus software to ensure safety ([VirusTotal](https://www.virustotal.com/gui/url/a9bd90fcfaadada8a2eaf43d64dcb9d72f3cb6f2d3c4b9c468f0bf03bd2993ca/details)). 
+No evidence suggests this mod is a trojan or virus. However, always scan downloaded files with antivirus software to ensure safety. Here's the [VirusTotal](https://www.virustotal.com/gui/search/https%253A%252F%252Fgithub.com%252FScrap-Mods%252Fnetworking-fix%252Freleases%252Fdownload%252Flatest%252FNetworkingFix.dll) link to scan the latest version of the mod.
 
 ### Does it affect critical stuff like logic, physics, or other game mechanics? ⚙️
 No, this mod primarily focuses on resolving network packet stalling issues and does not impact game logic, physics, or other core mechanics.
