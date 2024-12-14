@@ -50,4 +50,4 @@ No, this mod primarily focuses on resolving network packet stalling issues and d
 
 ### Do I have to inject every time I want to load up the game? 💻
 - **Manual Injection:** Yes, you need to inject the DLL each time you start the game.
-- **Automatic Injection:** Use the [SM-DLL-Injector](#how-to-download-and-enable) method to place the DLL in a directory where it will be loaded automatically.
+- **Automatic Injection:** Use the [SM-DLL-Injector](#how-to-download-and-enable-) method to place the DLL in a directory where it will be loaded automatically.
