@@ -29,21 +29,21 @@ ScrapMechanic.exe.text + 416316 : 75 0C - jne ScrapMechanic.exe.text + 416324
 */
 
 // Set any version that is supported
-#define _SM_VERSION_NUM 073776
+#define _SM_VERSION_NUM 0x074778
 
-#if _SM_VERSION_NUM == 073776
+#if _SM_VERSION_NUM == 0x074778 || _SM_VERSION_NUM == 0x073776
 static constexpr std::uintptr_t offset = 0x40735C;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
-#elif _SM_VERSION_NUM == 072775
+#elif _SM_VERSION_NUM == 0x072775
 static constexpr std::uintptr_t offset = 0x4073DC;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
-#elif _SM_VERSION_NUM == 071772
+#elif _SM_VERSION_NUM == 0x071772
 static constexpr std::uintptr_t offset = 0x4073BC;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
-#elif _SM_VERSION_NUM == 066
+#elif _SM_VERSION_NUM == 0x066
 static constexpr std::uintptr_t offset = 0x4162F9 + 0x1000;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3E, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3F, 0x01, 0x00, 0x00, 0x90 };
