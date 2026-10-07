@@ -29,9 +29,17 @@ ScrapMechanic.exe.text + 416316 : 75 0C - jne ScrapMechanic.exe.text + 416324
 */
 
 // Set any version that is supported
-#define _SM_VERSION_NUM 0x074778
+#define _SM_VERSION_NUM 0x106889
 
-#if _SM_VERSION_NUM == 0x074778 || _SM_VERSION_NUM == 0x073776
+#if _SM_VERSION_NUM == 0x106889
+static constexpr std::uintptr_t offset = 0x451789;
+static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x1A, 0x01, 0x00, 0x00 };
+static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x1B, 0x01, 0x00, 0x00, 0x90 };
+#elif _SM_VERSION_NUM == 0x105876
+static constexpr std::uintptr_t offset = 0x4509E9;
+static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x1A, 0x01, 0x00, 0x00 };
+static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x1B, 0x01, 0x00, 0x00, 0x90 };
+#elif _SM_VERSION_NUM == 0x074778 || _SM_VERSION_NUM == 0x073776
 static constexpr std::uintptr_t offset = 0x40735C;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3B, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3C, 0x01, 0x00, 0x00, 0x90 };
@@ -48,7 +56,7 @@ static constexpr std::uintptr_t offset = 0x4162F9 + 0x1000;
 static constexpr std::array<std::uint8_t, 6> originalBytes{ 0x0F, 0x86, 0x3E, 0x01, 0x00, 0x00 };
 static constexpr std::array<std::uint8_t, 6> replacedBytes{ 0xE9, 0x3F, 0x01, 0x00, 0x00, 0x90 };
 #else
-#   error Unsupported game version
+# error Unsupported game version
 #endif
 
 static void* GetFinalAddress()
